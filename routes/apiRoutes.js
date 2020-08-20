@@ -1,5 +1,3 @@
-
-
 var apiRoutes = (app) => {
     app.get("/api/notes", (req, res) => {
         // RETURN JSON OF SAVED NOTES
@@ -18,4 +16,4 @@ var apiRoutes = (app) => {
     })
 }
 
-export default apiRoutes
+module.exports = apiRoutes;
