@@ -6,17 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="Note Taker" content="A simple note taker app using express" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/pulse/bootstrap.min.css" integrity="sha384-L7+YG8QLqGvxQGffJ6utDKFwmGwtLcCjtwvonVZR/Ba2VzhpMwBz51GaXnUsuYbj" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/pulse/bootstrap.min.css"
+        integrity="sha384-L7+YG8QLqGvxQGffJ6utDKFwmGwtLcCjtwvonVZR/Ba2VzhpMwBz51GaXnUsuYbj" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
-    <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
+    <link rel="stylesheet" href="assets/css/style.css">
     <title>Note Taker</title>
 </head>
 
 <body>
+    <nav class="navbar navbar-dark bg-primary">
+        <a class="navbar-brand" href="/">Note Taker
+        </a>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <aside class="col-3 list-container bg-dark">
+                <ul class="list-group">
+
+                </ul>
+            </aside>
+            <main class="col-9">
+                <input class="note-title w-100" placeholder="Note Title" maxlength="28" type="text">
+                <hr>
+                <textarea class="note-textarea w-100" placeholder="Note Text"></textarea>
+            </main>
+        </div>
+    </div>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        var ul = $("ul")
+        for (let i = 0; i < 50; i++) {
+            let li = $("<li>").text("TEST #" + i);
+            li.addClass("list-group-item d-flex");
+            ul.append(li);
+        }
+    </script>
 </body>
 
 </html>

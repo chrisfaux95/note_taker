@@ -1,0 +1,33 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+}
+
+.note-textarea, .note-title {
+    width: 100%;
+    outline: none;
+    border: none;
+}
+
+.note-textarea {
+    resize: none;
+    height: calc(100% - 100px);
+    padding: 5px;
+    padding-top: 15px;
+}
+
+.note-title {
+    height: 50px;
+    margin-top: 13px;
+    font-size: 3rem;
+}
+
+
+.list-container {
+    padding-left: 0;
+    overflow-y: scroll;
+    height: calc(100vh - 75px);
+}
+
