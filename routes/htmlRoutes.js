@@ -1,6 +1,6 @@
 import { join } from "path";
 
-var htmlRoute = app => {
+var htmlRoutes = app => {
     // ROUTE TO NOTES PAGE
     app.get("/notes", (req, res) => {
         res.sendFile(join(__dirname, "../public/notes.html"))
@@ -11,4 +11,4 @@ var htmlRoute = app => {
     })
 }
 
-export default htmlRoute;
+export default htmlRoutes;
