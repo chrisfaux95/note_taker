@@ -43,7 +43,7 @@ function handleNoteSave() {
         title: $noteTitle.val(),
         text: $noteText.val()
     }
-    saveNote(newNote).then(rerender)
+    saveNote(newNote).then(rerender);
 }
 
 
@@ -61,12 +61,12 @@ function handleNoteDelete(event) {
 
 function handleNoteView() {
     currentNote = $(this).data();
-    renderActiveNote();
+    renderCurrentNote();
 }
 
 function handleNewNoteView() {
     currentNote = {};
-    renderActiveNote();
+    renderCurrentNote();
 }
 
 function handleRenderSaveBtn() {
@@ -98,7 +98,7 @@ function renderNoteList(notes) {
 
         if(withDeleteButton){
             let $delBtn = $("<i>");
-            $delBtn.addClass("fas fa-trash-alt float-right text-danger delete-note");
+            $delBtn.addClass("far fa-trash-alt float-right text-danger delete-note");
             $li.append($delBtn);
         }
         return $li
@@ -111,7 +111,7 @@ function getAndRenderNotes() {
 
 function rerender() {
     getAndRenderNotes();
-    renderActiveNote();
+    renderCurrentNote();
 }
 
 $saveNoteBtn.on("click", handleNoteSave);
