@@ -106,7 +106,11 @@ function renderNoteList(notes) {
 }
 
 function getAndRenderNotes() {
-    return getNotes().then(renderNoteList);
+    // console.log("RENDERING NOTES")
+    return getNotes().then((res) => {
+        // console.log(res);
+        renderNoteList(res);
+    });
 }
 
 function rerender() {
