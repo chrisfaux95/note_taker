@@ -32,7 +32,7 @@ function deleteNote(id) {
 function renderCurrentNote() {
     $saveNoteBtn.hide();
 
-    if(currentNote.id) {
+    if (currentNote.id) {
         $noteTitle.val(currentNote.title);
         $noteText.val(currentNote.text);
     }
@@ -52,7 +52,7 @@ function handleNoteDelete(event) {
 
     const note = $(this).parent(".list-group-item").data();
 
-    if(currentNote.id === note.id) {
+    if (currentNote.id === note.id) {
         currentNote = {};
     }
 
@@ -70,7 +70,7 @@ function handleNewNoteView() {
 }
 
 function handleRenderSaveBtn() {
-    if(!$noteTitle.val().trim() || !$noteText.val().trim()) {
+    if (!$noteTitle.val().trim() || !$noteText.val().trim()) {
         $saveNoteBtn.hide();
     } else {
         $saveNoteBtn.show();
@@ -81,22 +81,22 @@ function renderNoteList(notes) {
     $noteList.empty();
     const noteListItems = [];
 
-    if(notes.length === 0) {
+    if (notes.length === 0) {
         noteListItems.push(create$li("No Saved Notes", false));
     }
 
     notes.forEach(note => {
-        noteListItems.push(create$li(note.title).data(none));
+        noteListItems.push(create$li(note.title).data(note));
     });
 
     $noteList.append(noteListItems);
 
-    function create$li(text, withDeleteButton = true){
+    function create$li(text, withDeleteButton = true) {
         let $li = $("<li>").addClass("list-group-item");
         let $span = $("<span>").text(text);
         $li.append($span);
 
-        if(withDeleteButton){
+        if (withDeleteButton) {
             let $delBtn = $("<i>");
             $delBtn.addClass("far fa-trash-alt float-right text-danger delete-note");
             $li.append($delBtn);
