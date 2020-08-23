@@ -27,4 +27,8 @@ function loadDB() {
     return JSON.parse(fs.readFileSync("db/db.json"));
 }
 
+function saveDB(json) {
+    fs.writeFileSync("db/db.json", json)
+}
+
 module.exports = apiRoutes;
