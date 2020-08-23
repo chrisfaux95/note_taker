@@ -12,6 +12,13 @@ var apiRoutes = (app) => {
 
     app.post("/api/notes", (req, res) => {
         // ADD NEW NOTE TO NOTES
+        console.log("ADD NEW NOTE")
+        let notes = loadDB();
+        notes.push(req.body);
+        console.log(notes);
+        saveDB(JSON.stringify(notes));
+
+        // console.log(req.body)
     })
 
     app.delete("/api/notes/:id", (req, res) => {
