@@ -43,7 +43,10 @@ function handleNoteSave() {
         title: $noteTitle.val(),
         text: $noteText.val()
     }
-    saveNote(newNote).then(rerender);
+    saveNote(newNote).then(() => {
+        getAndRenderNotes();
+        renderCurrentNote();
+    });
 }
 
 
@@ -56,7 +59,10 @@ function handleNoteDelete(event) {
         currentNote = {};
     }
 
-    deleteNote(note.id).then(rerender);
+    deleteNote(note.id).then(() => {
+        getAndRenderNotes();
+        renderCurrentNote();
+    });
 }
 
 function handleNoteView() {
@@ -111,11 +117,6 @@ function getAndRenderNotes() {
         // console.log(res);
         renderNoteList(res);
     });
-}
-
-function rerender() {
-    getAndRenderNotes();
-    renderCurrentNote();
 }
 
 $saveNoteBtn.on("click", handleNoteSave);
