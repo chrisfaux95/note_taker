@@ -3,6 +3,11 @@ const fs = require("fs");
 var apiRoutes = (app) => {
     app.get("/api/notes", (req, res) => {
         // RETURN JSON OF SAVED NOTES
+        // console.log("GET NOTES")
+        let notes = loadDB()
+        // console.log(notes)
+        res.json(notes)
+
     })
 
     app.post("/api/notes", (req, res) => {
