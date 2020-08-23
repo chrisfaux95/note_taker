@@ -18,4 +18,8 @@ var apiRoutes = (app) => {
     })
 }
 
+function loadDB() {
+    return JSON.parse(fs.readFileSync("db/db.json"));
+}
+
 module.exports = apiRoutes;
