@@ -1,3 +1,5 @@
+const fs = require("fs");
+
 var apiRoutes = (app) => {
     app.get("/api/notes", (req, res) => {
         // RETURN JSON OF SAVED NOTES
