@@ -1,4 +1,5 @@
 const fs = require("fs");
+const { createContext } = require("vm");
 
 var apiRoutes = (app) => {
     app.get("/api/notes", (req, res) => {
@@ -13,21 +14,18 @@ var apiRoutes = (app) => {
     app.post("/api/notes", (req, res) => {
         // ADD NEW NOTE TO NOTES
         // console.log("ADD NEW NOTE")
-        let notes = loadDB();
-        let currentNote = req.body;
-        let id = 0;
-        while(!checkID(notes,id)){
-            id = Math.floor(Math.random()*100000);
+        if (req.body.id) {
+            updateNote(req.body);
+        } else {
+            createNote(req.body);
         }
-        currentNote.id = id;
-        notes.push(currentNote);
-        console.log(notes);
-        saveDB(JSON.stringify(notes));
-    })
+
+    });
 
     app.delete("/api/notes/:id", (req, res) => {
         // DELETE SPECIFIED NOTE
         console.log("DELETE NOTE")
+        console.log(req.params.id)
 
     })
 
@@ -50,12 +48,29 @@ function saveDB(json) {
 }
 
 function checkID(list, id) {
-    for(let i = 0; i < list.length; i++) {
+    for (let i = 0; i < list.length; i++) {
         if (list[i].id === id) {
             return false;
         }
     }
-   return true;
+    return true;
 }
+
+function createNote(body) {
+    let notes = loadDB();
+    let currentNote = body;
+    // generates a unique id for the note
+    // (will keep running until unique)
+    let id = 0;
+    while (!checkID(notes, id)) {
+        id = Math.floor(Math.random() * 100000);
+    }
+    // adds the unique id;
+    currentNote.id = id;
+    notes.push(currentNote);
+    console.log(notes);
+    saveDB(JSON.stringify(notes));
+}
+
 
 module.exports = apiRoutes;
