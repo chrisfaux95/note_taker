@@ -1,5 +1,4 @@
 const fs = require("fs");
-const { createContext } = require("vm");
 
 var apiRoutes = (app) => {
     app.get("/api/notes", (req, res) => {
@@ -32,7 +31,9 @@ var apiRoutes = (app) => {
     app.post("/api/clear_notes", (req, res) => {
         // DELETE ALL NOTES
         console.log("CLEAR NOTES")
-        saveDB(JSON.stringify([]))
+        let notes = JSON.stringify([]);
+        saveDB(notes);
+        res.json([]);
     })
 }
 
