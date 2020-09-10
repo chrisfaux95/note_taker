@@ -48,12 +48,8 @@ function saveDB(json) {
 }
 
 function checkID(list, id) {
-    for (let i = 0; i < list.length; i++) {
-        if (list[i].id === id) {
-            return false;
-        }
-    }
-    return true;
+    const idCheck = (e) => e.id === id;
+    return list.some(idCheck);
 }
 
 function createNote(body) {
