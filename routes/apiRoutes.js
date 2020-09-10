@@ -64,9 +64,22 @@ function createNote(body) {
     // adds the unique id;
     currentNote.id = id;
     notes.push(currentNote);
-    console.log(notes);
+    // console.log(notes);
     saveDB(JSON.stringify(notes));
 }
 
+function updateNote(body) {
+    let notes = loadDB();
+    let currentNote = body;
+    // check if current note id actually exists in notes
+    let noteIndex = notes.findIndex((e) => e.id === currentNote.id);
+    if (noteIndex === -1) {
+        notes.push(currentNote);
+    } else {
+        notes[noteIndex].title = currentNote.title;
+        notes[noteIndex].text = currentNote.text;
+    }
+    saveDB(JSON.stringify(notes));
+}
 
 module.exports = apiRoutes;
