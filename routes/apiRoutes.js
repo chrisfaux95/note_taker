@@ -1,9 +1,10 @@
 const fs = require("fs");
+const { get } = require("http");
 
 var apiRoutes = (app) => {
     app.get("/api/notes", (req, res) => {
         // RETURN JSON OF SAVED NOTES
-        // console.log("GET NOTES")
+        console.log("GET NOTES");
         let notes = loadDB()
         // console.log(notes)
         res.json(notes)
@@ -12,7 +13,8 @@ var apiRoutes = (app) => {
 
     app.post("/api/notes", (req, res) => {
         // ADD NEW NOTE TO NOTES
-        // console.log("ADD NEW NOTE")
+        console.log("ADD NEW NOTE");
+        console.log(req.body);
         if (req.body.id) {
             updateNote(req.body);
         } else {
@@ -23,14 +25,18 @@ var apiRoutes = (app) => {
 
     app.delete("/api/notes/:id", (req, res) => {
         // DELETE SPECIFIED NOTE
-        console.log("DELETE NOTE")
-        console.log(req.params.id)
+        console.log("DELETE NOTE");
+        // console.log(req.params.id)
+        let notes = loadDB();
+        notes = notes.filter(e => e.id != req.params.id);
+        saveDB(JSON.stringify(notes));
+        res.json(notes);
 
     })
 
     app.post("/api/clear_notes", (req, res) => {
         // DELETE ALL NOTES
-        console.log("CLEAR NOTES")
+        console.log("CLEAR NOTES");
         let notes = JSON.stringify([]);
         saveDB(notes);
         res.json([]);
@@ -58,9 +64,9 @@ function createNote(body) {
     let currentNote = body;
     // generates a unique id for the note
     // (will keep running until unique)
-    let id = 0;
-    while (!checkID(notes, id)) {
-        id = Math.floor(Math.random() * 100000);
+    let id = getRandomID();
+    while (checkID(notes, id)) {
+        id = getRandomID();
     }
     // adds the unique id;
     currentNote.id = id;
@@ -70,17 +76,24 @@ function createNote(body) {
 }
 
 function updateNote(body) {
+    console.log("Update Notes")
     let notes = loadDB();
     let currentNote = body;
+    let currentID = parseInt(body.id)
+    console.log(currentNote);
     // check if current note id actually exists in notes
-    let noteIndex = notes.findIndex((e) => e.id === currentNote.id);
+    let noteIndex = notes.findIndex((e) => e.id === currentID);
+    console.log(noteIndex);
     if (noteIndex === -1) {
         notes.push(currentNote);
     } else {
-        notes[noteIndex].title = currentNote.title;
-        notes[noteIndex].text = currentNote.text;
+        notes[noteIndex] = currentNote;
     }
     saveDB(JSON.stringify(notes));
+}
+
+function getRandomID() {
+    return Math.floor(Math.random() * 100000);
 }
 
 module.exports = apiRoutes;

@@ -30,18 +30,27 @@ function deleteNote(id) {
 }
 
 function renderCurrentNote() {
+    console.log("render current Note")
     $saveNoteBtn.hide();
 
     if (currentNote.id) {
+        // $noteTitle.attr("readonly", true);
+        // $noteText.attr("readonly", true);
         $noteTitle.val(currentNote.title);
         $noteText.val(currentNote.text);
+    } else {
+        // $noteTitle.attr("readonly", false);
+        // $noteText.attr("readonly", false);
+        $noteTitle.val("");
+        $noteText.val("");
     }
 }
 
 function handleNoteSave() {
     let newNote = {
         title: $noteTitle.val(),
-        text: $noteText.val()
+        text: $noteText.val(),
+        id: currentNote.id
     }
     saveNote(newNote).then(() => {
         getAndRenderNotes();
@@ -66,11 +75,14 @@ function handleNoteDelete(event) {
 }
 
 function handleNoteView() {
+    console.log("view note");
     currentNote = $(this).data();
+    console.log(currentNote);
     renderCurrentNote();
 }
 
 function handleNewNoteView() {
+    console.log("new note");
     currentNote = {};
     renderCurrentNote();
 }
@@ -84,6 +96,7 @@ function handleRenderSaveBtn() {
 }
 
 function renderNoteList(notes) {
+    // console.log("RENDER NOTE LIST");
     $noteList.empty();
     const noteListItems = [];
 
@@ -112,7 +125,7 @@ function renderNoteList(notes) {
 }
 
 function getAndRenderNotes() {
-    // console.log("RENDERING NOTES")
+    // console.log("RENDERING NOTES");
     return getNotes().then((res) => {
         // console.log(res);
         renderNoteList(res);
